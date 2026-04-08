@@ -1,0 +1,39 @@
+cm_reg__:
+no = PK
+cm = FK->c _pst N-1 
+unit = FK->c_upm N-1
+asr = FK->c_asr(kode) N-1
+dr = FK->c_doc(kode) N-1
+asal = FK->c_ref4(kode)
+
+
+c_pst:
+cm = PK
+reg = FK->cm_reg__ 1-1
+edu = FK->c_edu(kode) N-1
+pkj = FK->c_pkj(kode) N-1
+agama = FK->ref_relegions(id) N-1
+wilayah = FK->ref_wilayah(kode) N-1
+wilayah_domisili = FK->ref_wilayah(kode) N-1
+
+cm_j26__:
+id = PK
+ut = FK->c_upm N-1
+dj = FK->c_doc(kode) N-1
+crg = FK->cm_reg__ N-1
+ccm = FK->c_pst N-1
+booking_id = FK->cm_sch(id) 1-1
+
+c_upm:
+KODE = PK
+
+c_pst_af:
+ID = PK
+CCM = FK->c_pst(cm) N-1
+
+cm_sch:
+ID = PK
+U2 = FK->c_upm(kode) N-1
+DR = FK->c_doc(kode) N-1
+CCM = FK->c _pst N-1
+ASI = FK->c_asr(kode) N-1
