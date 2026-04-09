@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ERD Pendaftaran</title>
+    <link rel="stylesheet" href="shared.css" />
+  </head>
+  <body>
+    <div class="toolbar">
+      <span>🖱 Drag tabel untuk memindahkan</span>
+      <div class="legend">
+        <div class="leg-item">
+          <span class="badge pk">PK</span><span>Primary Key</span>
+        </div>
+        <div class="leg-item">
+          <span class="badge fk">FK</span><span>Foreign Key</span>
+        </div>
+        <div class="leg-item">
+          <span
+            style="
+              display: inline-block;
+              width: 24px;
+              height: 2px;
+              background: #378add;
+              border-top: 2px dashed #378add;
+            "
+          ></span
+          ><span>N-1 (Dashed line)</span>
+        </div>
+        <div class="leg-item">
+          <span
+            style="
+              display: inline-block;
+              width: 24px;
+              height: 2px;
+              background: #639922;
+            "
+          ></span
+          ><span>1-1 (Solid line)</span>
+        </div>
+        <div class="leg-item">
+          <svg
+            style="
+              display: inline-block;
+              width: 20px;
+              height: 14px;
+              margin-right: 4px;
+            "
+            viewBox="0 0 20 14"
+          >
+            <path
+              d="M5 1L10 7L5 13 M10 7L0 7"
+              fill="none"
+              stroke="#378add"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span>Many (Crow's foot)</span>
+        </div>
+        <div class="leg-item">
+          <svg
+            style="
+              display: inline-block;
+              width: 20px;
+              height: 14px;
+              margin-right: 4px;
+            "
+            viewBox="0 0 20 14"
+          >
+            <line
+              x1="3"
+              y1="1"
+              x2="3"
+              y2="13"
+              stroke="#378add"
+              stroke-width="1.5"
+            />
+            <line
+              x1="7"
+              y1="1"
+              x2="7"
+              y2="13"
+              stroke="#378add"
+              stroke-width="1.5"
+            />
+          </svg>
+          <span>One (||)</span>
+        </div>
+      </div>
+    </div>
+    <div id="canvas-wrap">
+      <div id="canvas">
+        <svg id="arrows">
+          <defs>
+            <!-- Crow's foot markers for many side (N-1 and 1-N) -->
+            <marker
+              id="crowsfoot-blue"
+              viewBox="0 0 10 10"
+              refX="0"
+              refY="5"
+              markerWidth="6"
+              markerHeight="6"
+              orient="auto"
+            >
+              <path
+                d="M5 1L10 5L5 9 M10 5L0 5"
+                fill="none"
+                stroke="#378add"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </marker>
+            <marker
+              id="crowsfoot-green"
+              viewBox="0 0 10 10"
+              refX="0"
+              refY="5"
+              markerWidth="6"
+              markerHeight="6"
+              orient="auto"
+            >
+              <path
+                d="M5 1L10 5L5 9 M10 5L0 5"
+                fill="none"
+                stroke="#3b6d11"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </marker>
+
+            <!-- One side markers (double line: ||) -->
+            <marker
+              id="one-blue"
+              viewBox="0 0 10 10"
+              refX="0"
+              refY="5"
+              markerWidth="6"
+              markerHeight="6"
+              orient="auto"
+            >
+              <line
+                x1="2"
+                y1="1"
+                x2="2"
+                y2="9"
+                stroke="#378add"
+                stroke-width="1.5"
+              />
+              <line
+                x1="6"
+                y1="1"
+                x2="6"
+                y2="9"
+                stroke="#378add"
+                stroke-width="1.5"
+              />
+            </marker>
+            <marker
+              id="one-green"
+              viewBox="0 0 10 10"
+              refX="0"
+              refY="5"
+              markerWidth="6"
+              markerHeight="6"
+              orient="auto"
+            >
+              <line
+                x1="2"
+                y1="1"
+                x2="2"
+                y2="9"
+                stroke="#3b6d11"
+                stroke-width="1.5"
+              />
+              <line
+                x1="6"
+                y1="1"
+                x2="6"
+                y2="9"
+                stroke="#3b6d11"
+                stroke-width="1.5"
+              />
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+      // Define data for Pendaftaran ERD
+      const TABLES = {
+        c_upm: {
+          color: "#185fa5",
+          light: "#e6f1fb",
+          cols: [
+            { n: "KODE", t: "varchar(2)", pk: true },
+            { n: "UNIT", t: "varchar(200)" },
+            { n: "GROUP_", t: "varchar(2)" },
+            { n: "MD", t: "tinyint(3)" },
+            { n: "CV_", t: "decimal(2,0)" },
+            { n: "C1_", t: "decimal(2,0)" },
+            { n: "C2_", t: "decimal(2,0)" },
+            { n: "C3A_", t: "decimal(2,0)" },
+            { n: "C3B_", t: "decimal(2,0)" },
+            { n: "BED", t: "decimal(2,0)" },
+            { n: "KL", t: "varchar(2)" },
+            { n: "STS", t: "varchar(20)" },
+          ],
+        },
+        c_pst: {
+          color: "#0f6e56",
+          light: "#e1f5ee",
+          cols: [
+            { n: "cm", t: "int(8)", pk: true },
+            { n: "cm_tgl", t: "date" },
+            { n: "nama", t: "varchar(150)" },
+            { n: "keluarga", t: "varchar(15)" },
+            { n: "sex", t: "varchar(1)" },
+            { n: "agama", t: "varchar(1)", fk: "ref_relegions" },
+            { n: "tgl_lahir", t: "date" },
+            { n: "ms", t: "varchar(1)" },
+            { n: "alamat", t: "varchar(255)" },
+            { n: "wilayah", t: "varchar(25)", fk: "ref_wilayah" },
+            { n: "alamat_domisili", t: "varchar(255)" },
+            { n: "wilayah_domisili", t: "varchar(25)", fk: "ref_wilayah" },
+            { n: "no_ident", t: "varchar(16)" },
+            { n: "edu", t: "varchar(1)", fk: "c_edu" },
+            { n: "pkj", t: "varchar(2)", fk: "c_pkj" },
+            { n: "reg", t: "int(9)", fk: "cm_reg__" },
+          ],
+        },
+        cm_reg__: {
+          color: "#854f0b",
+          light: "#faeeda",
+          cols: [
+            { n: "no", t: "int(9)", pk: true },
+            { n: "tgl", t: "date" },
+            { n: "jam", t: "int(4)" },
+            { n: "unit", t: "varchar(2)", fk: "c_upm" },
+            { n: "kl", t: "varchar(2)" },
+            { n: "dr", t: "varchar(3)", fk: "c_doc" },
+            { n: "cm", t: "int(8)", fk: "c_pst" },
+            { n: "asr", t: "varchar(2)", fk: "c_asr" },
+            { n: "asal", t: "varchar(6)", fk: "c_ref4" },
+            { n: "cout", t: "varchar(1)" },
+            { n: "out2", t: "varchar(2)" },
+            { n: "wo", t: "varchar(1)" },
+            { n: "channel", t: "varchar(20)" },
+            { n: "updt", t: "timestamp" },
+          ],
+        },
+        cm_j26__: {
+          color: "#533489",
+          light: "#eeedfe",
+          cols: [
+            { n: "id", t: "int(11)", pk: true },
+            { n: "db", t: "date" },
+            { n: "ut", t: "varchar(2)", fk: "c_upm" },
+            { n: "dj", t: "varchar(3)", fk: "c_doc" },
+            { n: "qu", t: "smallint(3)" },
+            { n: "qd", t: "smallint(3)" },
+            { n: "qu_text", t: "varchar(50)" },
+            { n: "crg", t: "varchar(9)", fk: "cm_reg__" },
+            { n: "ccm", t: "varchar(8)", fk: "c_pst" },
+            { n: "booking_id", t: "int(11)", fk: "cm_sch__" },
+            { n: "hb", t: "varchar(4)" },
+            { n: "status", t: "varchar(50)" },
+          ],
+        },
+        c_asr: {
+          color: "#c41e3a",
+          light: "#ffe6e6",
+          cols: [
+            { n: "kode", t: "varchar(2)", pk: true },
+            { n: "asuransi", t: "varchar(35)" },
+            { n: "cob_bpjs", t: "varchar(1)" },
+            { n: "jkn", t: "tinyint(1)" },
+            { n: "alamat", t: "varchar(35)" },
+            { n: "kota", t: "varchar(15)" },
+            { n: "tlp", t: "varchar(14)" },
+          ],
+        },
+        c_doc: {
+          color: "#6f2da8",
+          light: "#f3e5ff",
+          cols: [
+            { n: "kode", t: "varchar(3)", pk: true },
+            { n: "nama", t: "varchar(60)" },
+            { n: "spesialis", t: "varchar(18)" },
+            { n: "idsp", t: "varchar(1)" },
+            { n: "alamat", t: "varchar(200)" },
+            { n: "tlp", t: "varchar(25)" },
+            { n: "status", t: "varchar(1)" },
+            { n: "aktif", t: "tinyint(1)" },
+            { n: "alias", t: "varchar(30)" },
+          ],
+        },
+        c_edu: {
+          color: "#ff8c00",
+          light: "#ffe4d6",
+          cols: [
+            { n: "KODE", t: "char(2)", pk: true },
+            { n: "KET", t: "varchar(25)" },
+          ],
+        },
+        c_pkj: {
+          color: "#228b22",
+          light: "#e6f9e6",
+          cols: [
+            { n: "KODE", t: "varchar(2)", pk: true },
+            { n: "PEKERJAAN", t: "varchar(25)" },
+          ],
+        },
+        c_ref4: {
+          color: "#1e90ff",
+          light: "#e6f0ff",
+          cols: [
+            { n: "kode", t: "varchar(6)", pk: true },
+            { n: "asal", t: "varchar(100)" },
+            { n: "ket", t: "varchar(35)" },
+            { n: "ppk", t: "varchar(8)" },
+            { n: "f_bpjs", t: "char(1)" },
+          ],
+        },
+        c_pst_af: {
+          color: "#ff4500",
+          light: "#ffe6d6",
+          cols: [
+            { n: "ID", t: "int(11)", pk: true },
+            { n: "CCM", t: "varchar(8)", fk: "c_pst" },
+            { n: "ASR", t: "varchar(2)" },
+            { n: "DUE", t: "date" },
+            { n: "NO", t: "varchar(20)" },
+            { n: "CRT", t: "timestamp" },
+          ],
+        },
+        cm_sch__: {
+          color: "#2f4f4f",
+          light: "#e8f5f0",
+          cols: [
+            { n: "ID", t: "int(9)", pk: true },
+            { n: "DSC", t: "date" },
+            { n: "U2", t: "varchar(2)", fk: "c_upm" },
+            { n: "DR", t: "varchar(3)", fk: "c_doc" },
+            { n: "NO", t: "smallint(3)" },
+            { n: "qu_text", t: "varchar(50)" },
+            { n: "CCM", t: "varchar(8)", fk: "c_pst" },
+            { n: "ASI", t: "varchar(2)", fk: "c_asr" },
+            { n: "KET", t: "varchar(14)" },
+          ],
+        },
+        ref_relegions: {
+          color: "#8b4513",
+          light: "#f5e6d3",
+          cols: [
+            { n: "id", t: "char(2)", pk: true },
+            { n: "name", t: "char(20)" },
+          ],
+        },
+        ref_wilayah: {
+          color: "#006666",
+          light: "#e6f9f9",
+          cols: [
+            { n: "kode", t: "varchar(13)", pk: true },
+            { n: "nama", t: "varchar(100)" },
+            { n: "kategori", t: "varchar(100)" },
+          ],
+        },
+      };
+
+      const POSITIONS = {
+        c_upm: { x: 20, y: 20 },
+        c_pst: { x: 280, y: 20 },
+        cm_reg__: { x: 520, y: 20 },
+        cm_j26__: { x: 760, y: 20 },
+        c_asr: { x: 1000, y: 20 },
+        c_doc: { x: 20, y: 350 },
+        c_edu: { x: 280, y: 350 },
+        c_pkj: { x: 520, y: 350 },
+        c_ref4: { x: 760, y: 350 },
+        c_pst_af: { x: 1000, y: 350 },
+        cm_sch__: { x: 1240, y: 20 },
+        ref_relegions: { x: 280, y: 630 },
+        ref_wilayah: { x: 520, y: 630 },
+      };
+
+      const RELATIONS = [
+        // cm_reg__ relationships
+        ["cm_reg__", "unit", "c_upm", "KODE", "n1"],
+        ["cm_reg__", "cm", "c_pst", "cm", "n1"],
+        ["cm_reg__", "dr", "c_doc", "kode", "n1"],
+        ["cm_reg__", "asr", "c_asr", "kode", "n1"],
+        ["cm_reg__", "asal", "c_ref4", "kode", "n1"],
+
+        // c_pst relationships
+        ["c_pst", "reg", "cm_reg__", "no", "11"],
+        ["c_pst", "edu", "c_edu", "KODE", "n1"],
+        ["c_pst", "pkj", "c_pkj", "KODE", "n1"],
+        ["c_pst", "agama", "ref_relegions", "id", "n1"],
+        ["c_pst", "wilayah", "ref_wilayah", "kode", "n1"],
+        ["c_pst", "wilayah_domisili", "ref_wilayah", "kode", "n1"],
+
+        // cm_j26__ relationships
+        ["cm_j26__", "ut", "c_upm", "KODE", "n1"],
+        ["cm_j26__", "dj", "c_doc", "kode", "n1"],
+        ["cm_j26__", "crg", "cm_reg__", "no", "n1"],
+        ["cm_j26__", "ccm", "c_pst", "cm", "n1"],
+        ["cm_j26__", "booking_id", "cm_sch__", "ID", "11"],
+
+        // c_pst_af relationships
+        ["c_pst_af", "CCM", "c_pst", "cm", "n1"],
+
+        // cm_sch__ relationships
+        ["cm_sch__", "U2", "c_upm", "KODE", "n1"],
+        ["cm_sch__", "DR", "c_doc", "kode", "n1"],
+        ["cm_sch__", "CCM", "c_pst", "cm", "n1"],
+        ["cm_sch__", "ASI", "c_asr", "kode", "n1"],
+      ];
+
+      // Initialize when DOM is ready
+      document.addEventListener("DOMContentLoaded", initializeERD);
+    </script>
+  </body>
+</html>

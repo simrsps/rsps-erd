@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ERD Radiologi</title>
+    <link rel="stylesheet" href="shared.css" />
+  </head>
+  <body>
+    <div class="toolbar">
+      <span>🖱 Drag tabel untuk memindahkan</span>
+      <div class="legend">
+        <div class="leg-item">
+          <span class="badge pk">PK</span><span>Primary Key</span>
+        </div>
+        <div class="leg-item">
+          <span class="badge fk">FK</span><span>Foreign Key</span>
+        </div>
+      </div>
+    </div>
+    <div id="canvas-wrap">
+      <div id="canvas">
+        <svg id="arrows">
+          <defs>
+            <marker
+              id="crowsfoot-blue"
+              viewBox="0 0 10 10"
+              refX="0"
+              refY="5"
+              markerWidth="6"
+              markerHeight="6"
+              orient="auto"
+            >
+              <path
+                d="M5 1L10 5L5 9 M10 5L0 5"
+                fill="none"
+                stroke="#378add"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </marker>
+            <marker
+              id="crowsfoot-green"
+              viewBox="0 0 10 10"
+              refX="0"
+              refY="5"
+              markerWidth="6"
+              markerHeight="6"
+              orient="auto"
+            >
+              <path
+                d="M5 1L10 5L5 9 M10 5L0 5"
+                fill="none"
+                stroke="#3b6d11"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </marker>
+            <marker
+              id="one-blue"
+              viewBox="0 0 10 10"
+              refX="0"
+              refY="5"
+              markerWidth="6"
+              markerHeight="6"
+              orient="auto"
+            >
+              <line
+                x1="2"
+                y1="1"
+                x2="2"
+                y2="9"
+                stroke="#378add"
+                stroke-width="1.5"
+              />
+              <line
+                x1="6"
+                y1="1"
+                x2="6"
+                y2="9"
+                stroke="#378add"
+                stroke-width="1.5"
+              />
+            </marker>
+            <marker
+              id="one-green"
+              viewBox="0 0 10 10"
+              refX="0"
+              refY="5"
+              markerWidth="6"
+              markerHeight="6"
+              orient="auto"
+            >
+              <line
+                x1="2"
+                y1="1"
+                x2="2"
+                y2="9"
+                stroke="#3b6d11"
+                stroke-width="1.5"
+              />
+              <line
+                x1="6"
+                y1="1"
+                x2="6"
+                y2="9"
+                stroke="#3b6d11"
+                stroke-width="1.5"
+              />
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+      // Define data for Radiologi ERD
+      const TABLES = {
+        // TODO: Add table definitions for Radiologi module
+      };
+
+      const POSITIONS = {
+        // TODO: Add table positions
+      };
+
+      const RELATIONS = [
+        // TODO: Add relationships
+      ];
+
+      // Initialize when DOM is ready
+      document.addEventListener("DOMContentLoaded", () => {
+        if (Object.keys(TABLES).length === 0) {
+          document.getElementById("canvas").innerHTML =
+            '<div style="display:flex; align-items:center; justify-content:center; height:100%; color:#999; font-size:18px;">Modul Radiologi - Data ERD akan ditampilkan di sini</div>';
+        } else {
+          initializeERD();
+        }
+      });
+    </script>
+  </body>
+</html>
