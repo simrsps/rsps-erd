@@ -7,186 +7,10 @@
     <link rel="stylesheet" href="shared.css" />
   </head>
   <body>
-    <div class="toolbar">
-      <span>🖱 Drag tabel untuk memindahkan</span>
-      <div class="legend">
-        <div class="leg-item">
-          <span class="badge pk">PK</span><span>Primary Key</span>
-        </div>
-        <div class="leg-item">
-          <span class="badge fk">FK</span><span>Foreign Key</span>
-        </div>
-        <div class="leg-item">
-          <span
-            style="
-              display: inline-block;
-              width: 24px;
-              height: 2px;
-              background: #378add;
-              border-top: 2px dashed #378add;
-            "
-          ></span
-          ><span>N-1 (Dashed line)</span>
-        </div>
-        <div class="leg-item">
-          <span
-            style="
-              display: inline-block;
-              width: 24px;
-              height: 2px;
-              background: #639922;
-            "
-          ></span
-          ><span>1-1 (Solid line)</span>
-        </div>
-        <div class="leg-item">
-          <svg
-            style="
-              display: inline-block;
-              width: 20px;
-              height: 14px;
-              margin-right: 4px;
-            "
-            viewBox="0 0 20 14"
-          >
-            <path
-              d="M5 1L10 7L5 13 M10 7L0 7"
-              fill="none"
-              stroke="#378add"
-              stroke-width="1.5"
-              stroke-linecap="round"
-            />
-          </svg>
-          <span>Many (Crow's foot)</span>
-        </div>
-        <div class="leg-item">
-          <svg
-            style="
-              display: inline-block;
-              width: 20px;
-              height: 14px;
-              margin-right: 4px;
-            "
-            viewBox="0 0 20 14"
-          >
-            <line
-              x1="3"
-              y1="1"
-              x2="3"
-              y2="13"
-              stroke="#378add"
-              stroke-width="1.5"
-            />
-            <line
-              x1="7"
-              y1="1"
-              x2="7"
-              y2="13"
-              stroke="#378add"
-              stroke-width="1.5"
-            />
-          </svg>
-          <span>One (||)</span>
-        </div>
-      </div>
-    </div>
+    <div id="toolbar"></div>
     <div id="canvas-wrap">
       <div id="canvas">
-        <svg id="arrows">
-          <defs>
-            <!-- Crow's foot markers for many side (N-1 and 1-N) -->
-            <marker
-              id="crowsfoot-blue"
-              viewBox="0 0 10 10"
-              refX="0"
-              refY="5"
-              markerWidth="6"
-              markerHeight="6"
-              orient="auto"
-            >
-              <path
-                d="M5 1L10 5L5 9 M10 5L0 5"
-                fill="none"
-                stroke="#378add"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </marker>
-            <marker
-              id="crowsfoot-green"
-              viewBox="0 0 10 10"
-              refX="0"
-              refY="5"
-              markerWidth="6"
-              markerHeight="6"
-              orient="auto"
-            >
-              <path
-                d="M5 1L10 5L5 9 M10 5L0 5"
-                fill="none"
-                stroke="#3b6d11"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </marker>
-
-            <!-- One side markers (double line: ||) -->
-            <marker
-              id="one-blue"
-              viewBox="0 0 10 10"
-              refX="0"
-              refY="5"
-              markerWidth="6"
-              markerHeight="6"
-              orient="auto"
-            >
-              <line
-                x1="2"
-                y1="1"
-                x2="2"
-                y2="9"
-                stroke="#378add"
-                stroke-width="1.5"
-              />
-              <line
-                x1="6"
-                y1="1"
-                x2="6"
-                y2="9"
-                stroke="#378add"
-                stroke-width="1.5"
-              />
-            </marker>
-            <marker
-              id="one-green"
-              viewBox="0 0 10 10"
-              refX="0"
-              refY="5"
-              markerWidth="6"
-              markerHeight="6"
-              orient="auto"
-            >
-              <line
-                x1="2"
-                y1="1"
-                x2="2"
-                y2="9"
-                stroke="#3b6d11"
-                stroke-width="1.5"
-              />
-              <line
-                x1="6"
-                y1="1"
-                x2="6"
-                y2="9"
-                stroke="#3b6d11"
-                stroke-width="1.5"
-              />
-            </marker>
-          </defs>
-        </svg>
+        <svg id="arrows"></svg>
       </div>
     </div>
 
@@ -209,52 +33,25 @@
         "ref_wilayah",
       ];
 
-      // Define positions for each table (only needed in halaman terkait)
-      const POSITIONS = {
-        c_upm: { x: 20, y: 20 },
-        c_pst: { x: 280, y: 20 },
-        cm_reg__: { x: 520, y: 20 },
-        cm_j26__: { x: 760, y: 20 },
-        c_asr: { x: 1000, y: 20 },
-        c_doc: { x: 20, y: 350 },
-        c_edu: { x: 280, y: 350 },
-        c_pkj: { x: 520, y: 350 },
-        c_ref4: { x: 760, y: 350 },
-        c_pst_af: { x: 1000, y: 350 },
-        cm_sch__: { x: 1240, y: 20 },
-        ref_relegions: { x: 280, y: 630 },
-        ref_wilayah: { x: 520, y: 630 },
-      };
+      // Override default positions with custom layout
+      //   POSITIONS = {
+      //     c_upm: { x: 20, y: 20 },
+      //     c_pst: { x: 280, y: 20 },
+      //     cm_reg__: { x: 520, y: 20 },
+      //     cm_j26__: { x: 760, y: 20 },
+      //     c_asr: { x: 1000, y: 20 },
+      //     c_doc: { x: 20, y: 350 },
+      //     c_edu: { x: 280, y: 350 },
+      //     c_pkj: { x: 520, y: 350 },
+      //     c_ref4: { x: 760, y: 350 },
+      //     c_pst_af: { x: 1000, y: 350 },
+      //     cm_sch__: { x: 1240, y: 20 },
+      //     ref_relegions: { x: 280, y: 630 },
+      //     ref_wilayah: { x: 520, y: 630 },
+      //   };
 
-      // Load and merge table data from individual JSON files
-      let TABLES = {};
-      let RELATIONS = [];
-
-      Promise.all(
-        tablesToLoad.map((tableName) =>
-          fetch(`data/tables/${tableName}.json`)
-            .then((response) => response.json())
-            .then((data) => ({
-              tableName,
-              tableData: data.table,
-              relations: data.relations || [],
-            })),
-        ),
-      )
-        .then((results) => {
-          // Merge all tables and relations using spread operator
-          results.forEach(({ tableName, tableData, relations }) => {
-            TABLES = { ...TABLES, ...tableData };
-            RELATIONS = [...RELATIONS, ...relations];
-          });
-          // Initialize ERD after all data is loaded
-          initializeERD();
-        })
-        .catch((error) => {
-          console.error("Error loading ERD data:", error);
-          document.getElementById("canvas").innerHTML =
-            '<div style="display:flex; align-items:center; justify-content:center; height:100%; color:#f00; font-size:14px;">Error loading ERD data</div>';
-        });
+      // Load ERD module
+      loadERDModule("Pendaftaran", tablesToLoad);
     </script>
   </body>
 </html>

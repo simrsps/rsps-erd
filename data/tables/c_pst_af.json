@@ -14,7 +14,13 @@
         {
           "n": "CCM",
           "t": "varchar(8)",
-          "fk": "c_pst",
+          "fk": [
+            {
+              "table": "c_pst",
+              "column": "cm",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
@@ -39,14 +45,5 @@
         }
       ]
     }
-  },
-  "relations": [
-    [
-      "c_pst_af",
-      "CCM",
-      "c_pst",
-      "cm",
-      "n1"
-    ]
-  ]
+  }
 }

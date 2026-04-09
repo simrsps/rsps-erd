@@ -34,6 +34,13 @@
         {
           "n": "agama",
           "t": "varchar(1)",
+          "fk": [
+            {
+              "table": "ref_relegions",
+              "column": "id",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
@@ -54,7 +61,13 @@
         {
           "n": "wilayah",
           "t": "varchar(25)",
-          "fk": "ref_wilayah",
+          "fk": [
+            {
+              "table": "ref_wilayah",
+              "column": "kode",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
@@ -65,7 +78,13 @@
         {
           "n": "wilayah_domisili",
           "t": "varchar(25)",
-          "fk": "ref_wilayah",
+          "fk": [
+            {
+              "table": "ref_wilayah",
+              "column": "kode",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
@@ -76,66 +95,40 @@
         {
           "n": "edu",
           "t": "varchar(1)",
-          "fk": "c_edu",
+          "fk": [
+            {
+              "table": "c_edu",
+              "column": "KODE",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
           "n": "pkj",
           "t": "varchar(2)",
-          "fk": "c_pkj",
+          "fk": [
+            {
+              "table": "c_pkj",
+              "column": "KODE",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
           "n": "reg",
           "t": "int(9)",
-          "fk": "cm_reg__",
+          "fk": [
+            {
+              "table": "cm_reg__",
+              "column": "no",
+              "cardinality": "11"
+            }
+          ],
           "note": null
         }
       ]
     }
-  },
-  "relations": [
-    [
-      "c_pst",
-      "reg",
-      "cm_reg__",
-      "no",
-      "11"
-    ],
-    [
-      "c_pst",
-      "edu",
-      "c_edu",
-      "KODE",
-      "n1"
-    ],
-    [
-      "c_pst",
-      "pkj",
-      "c_pkj",
-      "KODE",
-      "n1"
-    ],
-    [
-      "c_pst",
-      "agama",
-      "ref_relegions",
-      "id",
-      "n1"
-    ],
-    [
-      "c_pst",
-      "wilayah",
-      "ref_wilayah",
-      "kode",
-      "n1"
-    ],
-    [
-      "c_pst",
-      "wilayah_domisili",
-      "ref_wilayah",
-      "kode",
-      "n1"
-    ]
-  ]
+  }
 }

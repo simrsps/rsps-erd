@@ -19,13 +19,25 @@
         {
           "n": "ut",
           "t": "varchar(2)",
-          "fk": "c_upm",
+          "fk": [
+            {
+              "table": "c_upm",
+              "column": "KODE",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
           "n": "dj",
           "t": "varchar(3)",
-          "fk": "c_doc",
+          "fk": [
+            {
+              "table": "c_doc",
+              "column": "kode",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
@@ -46,19 +58,37 @@
         {
           "n": "crg",
           "t": "varchar(9)",
-          "fk": "cm_reg__",
+          "fk": [
+            {
+              "table": "cm_reg__",
+              "column": "no",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
           "n": "ccm",
           "t": "varchar(8)",
-          "fk": "c_pst",
+          "fk": [
+            {
+              "table": "c_pst",
+              "column": "cm",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
           "n": "booking_id",
           "t": "int(11)",
-          "fk": "cm_sch__",
+          "fk": [
+            {
+              "table": "cm_sch__",
+              "column": "ID",
+              "cardinality": "11"
+            }
+          ],
           "note": null
         },
         {
@@ -73,42 +103,5 @@
         }
       ]
     }
-  },
-  "relations": [
-    [
-      "cm_j26__",
-      "ut",
-      "c_upm",
-      "KODE",
-      "n1"
-    ],
-    [
-      "cm_j26__",
-      "dj",
-      "c_doc",
-      "kode",
-      "n1"
-    ],
-    [
-      "cm_j26__",
-      "crg",
-      "cm_reg__",
-      "no",
-      "n1"
-    ],
-    [
-      "cm_j26__",
-      "ccm",
-      "c_pst",
-      "cm",
-      "n1"
-    ],
-    [
-      "cm_j26__",
-      "booking_id",
-      "cm_sch__",
-      "ID",
-      "11"
-    ]
-  ]
+  }
 }

@@ -19,13 +19,25 @@
         {
           "n": "U2",
           "t": "varchar(2)",
-          "fk": "c_upm",
+          "fk": [
+            {
+              "table": "c_upm",
+              "column": "KODE",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
           "n": "DR",
           "t": "varchar(3)",
-          "fk": "c_doc",
+          "fk": [
+            {
+              "table": "c_doc",
+              "column": "kode",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
@@ -41,13 +53,25 @@
         {
           "n": "CCM",
           "t": "varchar(8)",
-          "fk": "c_pst",
+          "fk": [
+            {
+              "table": "c_pst",
+              "column": "cm",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
           "n": "ASI",
           "t": "varchar(2)",
-          "fk": "c_asr",
+          "fk": [
+            {
+              "table": "c_asr",
+              "column": "kode",
+              "cardinality": "n1"
+            }
+          ],
           "note": null
         },
         {
@@ -57,35 +81,5 @@
         }
       ]
     }
-  },
-  "relations": [
-    [
-      "cm_sch__",
-      "U2",
-      "c_upm",
-      "KODE",
-      "n1"
-    ],
-    [
-      "cm_sch__",
-      "DR",
-      "c_doc",
-      "kode",
-      "n1"
-    ],
-    [
-      "cm_sch__",
-      "CCM",
-      "c_pst",
-      "cm",
-      "n1"
-    ],
-    [
-      "cm_sch__",
-      "ASI",
-      "c_asr",
-      "kode",
-      "n1"
-    ]
-  ]
+  }
 }
