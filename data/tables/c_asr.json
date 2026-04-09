@@ -1,0 +1,48 @@
+{
+  "table": {
+    "c_asr": {
+      "color": "#c41e3a",
+      "light": "#ffe6e6",
+      "note": null,
+      "cols": [
+        {
+          "n": "kode",
+          "t": "varchar(2)",
+          "pk": true,
+          "note": null
+        },
+        {
+          "n": "asuransi",
+          "t": "varchar(35)",
+          "note": null
+        },
+        {
+          "n": "cob_bpjs",
+          "t": "varchar(1)",
+          "note": null
+        },
+        {
+          "n": "jkn",
+          "t": "tinyint(1)",
+          "note": null
+        },
+        {
+          "n": "alamat",
+          "t": "varchar(35)",
+          "note": null
+        },
+        {
+          "n": "kota",
+          "t": "varchar(15)",
+          "note": null
+        },
+        {
+          "n": "tlp",
+          "t": "varchar(14)",
+          "note": null
+        }
+      ]
+    }
+  },
+  "relations": []
+}

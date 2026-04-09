@@ -1,0 +1,124 @@
+{
+  "table": {
+    "cm_reg__": {
+      "color": "#854f0b",
+      "light": "#faeeda",
+      "note": null,
+      "cols": [
+        {
+          "n": "no",
+          "t": "int(9)",
+          "pk": true,
+          "note": null
+        },
+        {
+          "n": "tgl",
+          "t": "date",
+          "note": null
+        },
+        {
+          "n": "jam",
+          "t": "int(4)",
+          "note": null
+        },
+        {
+          "n": "unit",
+          "t": "varchar(2)",
+          "fk": "c_upm",
+          "note": null
+        },
+        {
+          "n": "kl",
+          "t": "varchar(2)",
+          "note": null
+        },
+        {
+          "n": "dr",
+          "t": "varchar(3)",
+          "fk": "c_doc",
+          "note": null
+        },
+        {
+          "n": "cm",
+          "t": "int(8)",
+          "fk": "c_pst",
+          "note": null
+        },
+        {
+          "n": "asr",
+          "t": "varchar(2)",
+          "fk": "c_asr",
+          "note": null
+        },
+        {
+          "n": "asal",
+          "t": "varchar(6)",
+          "fk": "c_ref4",
+          "note": null
+        },
+        {
+          "n": "cout",
+          "t": "varchar(1)",
+          "note": null
+        },
+        {
+          "n": "out2",
+          "t": "varchar(2)",
+          "note": null
+        },
+        {
+          "n": "wo",
+          "t": "varchar(1)",
+          "note": null
+        },
+        {
+          "n": "channel",
+          "t": "varchar(20)",
+          "note": null
+        },
+        {
+          "n": "updt",
+          "t": "timestamp",
+          "note": null
+        }
+      ]
+    }
+  },
+  "relations": [
+    [
+      "cm_reg__",
+      "unit",
+      "c_upm",
+      "KODE",
+      "n1"
+    ],
+    [
+      "cm_reg__",
+      "cm",
+      "c_pst",
+      "cm",
+      "n1"
+    ],
+    [
+      "cm_reg__",
+      "dr",
+      "c_doc",
+      "kode",
+      "n1"
+    ],
+    [
+      "cm_reg__",
+      "asr",
+      "c_asr",
+      "kode",
+      "n1"
+    ],
+    [
+      "cm_reg__",
+      "asal",
+      "c_ref4",
+      "kode",
+      "n1"
+    ]
+  ]
+}

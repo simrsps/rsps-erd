@@ -1,0 +1,73 @@
+{
+  "table": {
+    "c_upm": {
+      "color": "#185fa5",
+      "light": "#e6f1fb",
+      "note": "Unit/Departemen utama dalam sistem rumah sakit",
+      "cols": [
+        {
+          "n": "KODE",
+          "t": "varchar(2)",
+          "pk": true,
+          "note": "Kode unik 2 karakter untuk identifikasi unit"
+        },
+        {
+          "n": "UNIT",
+          "t": "varchar(200)",
+          "note": "Nama lengkap unit atau departemen"
+        },
+        {
+          "n": "GROUP_",
+          "t": "varchar(2)",
+          "note": null
+        },
+        {
+          "n": "MD",
+          "t": "tinyint(3)",
+          "note": null
+        },
+        {
+          "n": "CV_",
+          "t": "decimal(2,0)",
+          "note": null
+        },
+        {
+          "n": "C1_",
+          "t": "decimal(2,0)",
+          "note": null
+        },
+        {
+          "n": "C2_",
+          "t": "decimal(2,0)",
+          "note": null
+        },
+        {
+          "n": "C3A_",
+          "t": "decimal(2,0)",
+          "note": null
+        },
+        {
+          "n": "C3B_",
+          "t": "decimal(2,0)",
+          "note": null
+        },
+        {
+          "n": "BED",
+          "t": "decimal(2,0)",
+          "note": null
+        },
+        {
+          "n": "KL",
+          "t": "varchar(2)",
+          "note": null
+        },
+        {
+          "n": "STS",
+          "t": "varchar(20)",
+          "note": null
+        }
+      ]
+    }
+  },
+  "relations": []
+}

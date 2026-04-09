@@ -1,0 +1,58 @@
+{
+  "table": {
+    "c_doc": {
+      "color": "#6f2da8",
+      "light": "#f3e5ff",
+      "note": null,
+      "cols": [
+        {
+          "n": "kode",
+          "t": "varchar(3)",
+          "pk": true,
+          "note": null
+        },
+        {
+          "n": "nama",
+          "t": "varchar(60)",
+          "note": null
+        },
+        {
+          "n": "spesialis",
+          "t": "varchar(18)",
+          "note": null
+        },
+        {
+          "n": "idsp",
+          "t": "varchar(1)",
+          "note": null
+        },
+        {
+          "n": "alamat",
+          "t": "varchar(200)",
+          "note": null
+        },
+        {
+          "n": "tlp",
+          "t": "varchar(25)",
+          "note": null
+        },
+        {
+          "n": "status",
+          "t": "varchar(1)",
+          "note": null
+        },
+        {
+          "n": "aktif",
+          "t": "tinyint(1)",
+          "note": null
+        },
+        {
+          "n": "alias",
+          "t": "varchar(30)",
+          "note": null
+        }
+      ]
+    }
+  },
+  "relations": []
+}

@@ -1,0 +1,91 @@
+{
+  "table": {
+    "cm_sch__": {
+      "color": "#2f4f4f",
+      "light": "#e8f5f0",
+      "note": null,
+      "cols": [
+        {
+          "n": "ID",
+          "t": "int(9)",
+          "pk": true,
+          "note": null
+        },
+        {
+          "n": "DSC",
+          "t": "date",
+          "note": null
+        },
+        {
+          "n": "U2",
+          "t": "varchar(2)",
+          "fk": "c_upm",
+          "note": null
+        },
+        {
+          "n": "DR",
+          "t": "varchar(3)",
+          "fk": "c_doc",
+          "note": null
+        },
+        {
+          "n": "NO",
+          "t": "smallint(3)",
+          "note": null
+        },
+        {
+          "n": "qu_text",
+          "t": "varchar(50)",
+          "note": null
+        },
+        {
+          "n": "CCM",
+          "t": "varchar(8)",
+          "fk": "c_pst",
+          "note": null
+        },
+        {
+          "n": "ASI",
+          "t": "varchar(2)",
+          "fk": "c_asr",
+          "note": null
+        },
+        {
+          "n": "KET",
+          "t": "varchar(14)",
+          "note": null
+        }
+      ]
+    }
+  },
+  "relations": [
+    [
+      "cm_sch__",
+      "U2",
+      "c_upm",
+      "KODE",
+      "n1"
+    ],
+    [
+      "cm_sch__",
+      "DR",
+      "c_doc",
+      "kode",
+      "n1"
+    ],
+    [
+      "cm_sch__",
+      "CCM",
+      "c_pst",
+      "cm",
+      "n1"
+    ],
+    [
+      "cm_sch__",
+      "ASI",
+      "c_asr",
+      "kode",
+      "n1"
+    ]
+  ]
+}

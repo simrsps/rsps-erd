@@ -1,0 +1,52 @@
+{
+  "table": {
+    "c_pst_af": {
+      "color": "#ff4500",
+      "light": "#ffe6d6",
+      "note": null,
+      "cols": [
+        {
+          "n": "ID",
+          "t": "int(11)",
+          "pk": true,
+          "note": null
+        },
+        {
+          "n": "CCM",
+          "t": "varchar(8)",
+          "fk": "c_pst",
+          "note": null
+        },
+        {
+          "n": "ASR",
+          "t": "varchar(2)",
+          "note": null
+        },
+        {
+          "n": "DUE",
+          "t": "date",
+          "note": null
+        },
+        {
+          "n": "NO",
+          "t": "varchar(20)",
+          "note": null
+        },
+        {
+          "n": "CRT",
+          "t": "timestamp",
+          "note": null
+        }
+      ]
+    }
+  },
+  "relations": [
+    [
+      "c_pst_af",
+      "CCM",
+      "c_pst",
+      "cm",
+      "n1"
+    ]
+  ]
+}

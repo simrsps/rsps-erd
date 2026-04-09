@@ -1,0 +1,23 @@
+{
+  "table": {
+    "ref_relegions": {
+      "color": "#8b4513",
+      "light": "#f5e6d3",
+      "note": null,
+      "cols": [
+        {
+          "n": "id",
+          "t": "char(2)",
+          "pk": true,
+          "note": null
+        },
+        {
+          "n": "name",
+          "t": "char(20)",
+          "note": null
+        }
+      ]
+    }
+  },
+  "relations": []
+}

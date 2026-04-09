@@ -1,0 +1,23 @@
+{
+  "table": {
+    "c_pkj": {
+      "color": "#228b22",
+      "light": "#e6f9e6",
+      "note": null,
+      "cols": [
+        {
+          "n": "KODE",
+          "t": "varchar(2)",
+          "pk": true,
+          "note": null
+        },
+        {
+          "n": "PEKERJAAN",
+          "t": "varchar(25)",
+          "note": null
+        }
+      ]
+    }
+  },
+  "relations": []
+}

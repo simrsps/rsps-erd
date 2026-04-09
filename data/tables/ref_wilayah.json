@@ -1,0 +1,28 @@
+{
+  "table": {
+    "ref_wilayah": {
+      "color": "#006666",
+      "light": "#e6f9f9",
+      "note": null,
+      "cols": [
+        {
+          "n": "kode",
+          "t": "varchar(13)",
+          "pk": true,
+          "note": null
+        },
+        {
+          "n": "nama",
+          "t": "varchar(100)",
+          "note": null
+        },
+        {
+          "n": "kategori",
+          "t": "varchar(100)",
+          "note": null
+        }
+      ]
+    }
+  },
+  "relations": []
+}

@@ -1,0 +1,23 @@
+{
+  "table": {
+    "c_edu": {
+      "color": "#ff8c00",
+      "light": "#ffe4d6",
+      "note": null,
+      "cols": [
+        {
+          "n": "KODE",
+          "t": "char(2)",
+          "pk": true,
+          "note": null
+        },
+        {
+          "n": "KET",
+          "t": "varchar(25)",
+          "note": null
+        }
+      ]
+    }
+  },
+  "relations": []
+}

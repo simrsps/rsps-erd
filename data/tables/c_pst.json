@@ -1,0 +1,141 @@
+{
+  "table": {
+    "c_pst": {
+      "color": "#0f6e56",
+      "light": "#e1f5ee",
+      "note": "Data pasien - Informasi demografi dan identitas pasien",
+      "cols": [
+        {
+          "n": "cm",
+          "t": "int(8)",
+          "pk": true,
+          "note": "Customer/Pasien ID unik - Primary key"
+        },
+        {
+          "n": "cm_tgl",
+          "t": "date",
+          "note": "Tanggal registrasi pasien dalam sistem"
+        },
+        {
+          "n": "nama",
+          "t": "varchar(150)",
+          "note": "Nama lengkap pasien"
+        },
+        {
+          "n": "keluarga",
+          "t": "varchar(15)",
+          "note": null
+        },
+        {
+          "n": "sex",
+          "t": "varchar(1)",
+          "note": "Jenis kelamin: L (Laki-laki) atau P (Perempuan)"
+        },
+        {
+          "n": "agama",
+          "t": "varchar(1)",
+          "note": null
+        },
+        {
+          "n": "tgl_lahir",
+          "t": "date",
+          "note": null
+        },
+        {
+          "n": "ms",
+          "t": "varchar(1)",
+          "note": null
+        },
+        {
+          "n": "alamat",
+          "t": "varchar(255)",
+          "note": null
+        },
+        {
+          "n": "wilayah",
+          "t": "varchar(25)",
+          "fk": "ref_wilayah",
+          "note": null
+        },
+        {
+          "n": "alamat_domisili",
+          "t": "varchar(255)",
+          "note": null
+        },
+        {
+          "n": "wilayah_domisili",
+          "t": "varchar(25)",
+          "fk": "ref_wilayah",
+          "note": null
+        },
+        {
+          "n": "no_ident",
+          "t": "varchar(16)",
+          "note": null
+        },
+        {
+          "n": "edu",
+          "t": "varchar(1)",
+          "fk": "c_edu",
+          "note": null
+        },
+        {
+          "n": "pkj",
+          "t": "varchar(2)",
+          "fk": "c_pkj",
+          "note": null
+        },
+        {
+          "n": "reg",
+          "t": "int(9)",
+          "fk": "cm_reg__",
+          "note": null
+        }
+      ]
+    }
+  },
+  "relations": [
+    [
+      "c_pst",
+      "reg",
+      "cm_reg__",
+      "no",
+      "11"
+    ],
+    [
+      "c_pst",
+      "edu",
+      "c_edu",
+      "KODE",
+      "n1"
+    ],
+    [
+      "c_pst",
+      "pkj",
+      "c_pkj",
+      "KODE",
+      "n1"
+    ],
+    [
+      "c_pst",
+      "agama",
+      "ref_relegions",
+      "id",
+      "n1"
+    ],
+    [
+      "c_pst",
+      "wilayah",
+      "ref_wilayah",
+      "kode",
+      "n1"
+    ],
+    [
+      "c_pst",
+      "wilayah_domisili",
+      "ref_wilayah",
+      "kode",
+      "n1"
+    ]
+  ]
+}

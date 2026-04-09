@@ -1,0 +1,38 @@
+{
+  "table": {
+    "c_ref4": {
+      "color": "#1e90ff",
+      "light": "#e6f0ff",
+      "note": null,
+      "cols": [
+        {
+          "n": "kode",
+          "t": "varchar(6)",
+          "pk": true,
+          "note": null
+        },
+        {
+          "n": "asal",
+          "t": "varchar(100)",
+          "note": null
+        },
+        {
+          "n": "ket",
+          "t": "varchar(35)",
+          "note": null
+        },
+        {
+          "n": "ppk",
+          "t": "varchar(8)",
+          "note": null
+        },
+        {
+          "n": "f_bpjs",
+          "t": "char(1)",
+          "note": null
+        }
+      ]
+    }
+  },
+  "relations": []
+}

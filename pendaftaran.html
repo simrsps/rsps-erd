@@ -192,227 +192,24 @@
 
     <script src="shared.js"></script>
     <script>
-      // Define data for Pendaftaran ERD
-      const TABLES = {
-        c_upm: {
-          color: "#185fa5",
-          light: "#e6f1fb",
-          note: "Unit/Departemen utama dalam sistem rumah sakit",
-          cols: [
-            {
-              n: "KODE",
-              t: "varchar(2)",
-              pk: true,
-              note: "Kode unik 2 karakter untuk identifikasi unit",
-            },
-            {
-              n: "UNIT",
-              t: "varchar(200)",
-              note: "Nama lengkap unit atau departemen",
-            },
-            { n: "GROUP_", t: "varchar(2)", note: null },
-            { n: "MD", t: "tinyint(3)", note: null },
-            { n: "CV_", t: "decimal(2,0)", note: null },
-            { n: "C1_", t: "decimal(2,0)", note: null },
-            { n: "C2_", t: "decimal(2,0)", note: null },
-            { n: "C3A_", t: "decimal(2,0)", note: null },
-            { n: "C3B_", t: "decimal(2,0)", note: null },
-            { n: "BED", t: "decimal(2,0)", note: null },
-            { n: "KL", t: "varchar(2)", note: null },
-            { n: "STS", t: "varchar(20)", note: null },
-          ],
-        },
-        c_pst: {
-          color: "#0f6e56",
-          light: "#e1f5ee",
-          note: "Data pasien - Informasi demografi dan identitas pasien",
-          cols: [
-            {
-              n: "cm",
-              t: "int(8)",
-              pk: true,
-              note: "Customer/Pasien ID unik - Primary key",
-            },
-            {
-              n: "cm_tgl",
-              t: "date",
-              note: "Tanggal registrasi pasien dalam sistem",
-            },
-            { n: "nama", t: "varchar(150)", note: "Nama lengkap pasien" },
-            { n: "keluarga", t: "varchar(15)", note: null },
-            {
-              n: "sex",
-              t: "varchar(1)",
-              note: "Jenis kelamin: L (Laki-laki) atau P (Perempuan)",
-            },
-            { n: "agama", t: "varchar(1)", fk: "ref_relegions", note: null },
-            { n: "tgl_lahir", t: "date", note: null },
-            { n: "ms", t: "varchar(1)", note: null },
-            { n: "alamat", t: "varchar(255)", note: null },
-            { n: "wilayah", t: "varchar(25)", fk: "ref_wilayah", note: null },
-            { n: "alamat_domisili", t: "varchar(255)", note: null },
-            {
-              n: "wilayah_domisili",
-              t: "varchar(25)",
-              fk: "ref_wilayah",
-              note: null,
-            },
-            { n: "no_ident", t: "varchar(16)", note: null },
-            { n: "edu", t: "varchar(1)", fk: "c_edu", note: null },
-            { n: "pkj", t: "varchar(2)", fk: "c_pkj", note: null },
-            { n: "reg", t: "int(9)", fk: "cm_reg__", note: null },
-          ],
-        },
-        cm_reg__: {
-          color: "#854f0b",
-          light: "#faeeda",
-          note: null,
-          cols: [
-            { n: "no", t: "int(9)", pk: true, note: null },
-            { n: "tgl", t: "date", note: null },
-            { n: "jam", t: "int(4)", note: null },
-            { n: "unit", t: "varchar(2)", fk: "c_upm", note: null },
-            { n: "kl", t: "varchar(2)", note: null },
-            { n: "dr", t: "varchar(3)", fk: "c_doc", note: null },
-            { n: "cm", t: "int(8)", fk: "c_pst", note: null },
-            { n: "asr", t: "varchar(2)", fk: "c_asr", note: null },
-            { n: "asal", t: "varchar(6)", fk: "c_ref4", note: null },
-            { n: "cout", t: "varchar(1)", note: null },
-            { n: "out2", t: "varchar(2)", note: null },
-            { n: "wo", t: "varchar(1)", note: null },
-            { n: "channel", t: "varchar(20)", note: null },
-            { n: "updt", t: "timestamp", note: null },
-          ],
-        },
-        cm_j26__: {
-          color: "#533489",
-          light: "#eeedfe",
-          note: null,
-          cols: [
-            { n: "id", t: "int(11)", pk: true, note: null },
-            { n: "db", t: "date", note: null },
-            { n: "ut", t: "varchar(2)", fk: "c_upm", note: null },
-            { n: "dj", t: "varchar(3)", fk: "c_doc", note: null },
-            { n: "qu", t: "smallint(3)", note: null },
-            { n: "qd", t: "smallint(3)", note: null },
-            { n: "qu_text", t: "varchar(50)", note: null },
-            { n: "crg", t: "varchar(9)", fk: "cm_reg__", note: null },
-            { n: "ccm", t: "varchar(8)", fk: "c_pst", note: null },
-            { n: "booking_id", t: "int(11)", fk: "cm_sch__", note: null },
-            { n: "hb", t: "varchar(4)", note: null },
-            { n: "status", t: "varchar(50)", note: null },
-          ],
-        },
-        c_asr: {
-          color: "#c41e3a",
-          light: "#ffe6e6",
-          note: null,
-          cols: [
-            { n: "kode", t: "varchar(2)", pk: true, note: null },
-            { n: "asuransi", t: "varchar(35)", note: null },
-            { n: "cob_bpjs", t: "varchar(1)", note: null },
-            { n: "jkn", t: "tinyint(1)", note: null },
-            { n: "alamat", t: "varchar(35)", note: null },
-            { n: "kota", t: "varchar(15)", note: null },
-            { n: "tlp", t: "varchar(14)", note: null },
-          ],
-        },
-        c_doc: {
-          color: "#6f2da8",
-          light: "#f3e5ff",
-          note: null,
-          cols: [
-            { n: "kode", t: "varchar(3)", pk: true, note: null },
-            { n: "nama", t: "varchar(60)", note: null },
-            { n: "spesialis", t: "varchar(18)", note: null },
-            { n: "idsp", t: "varchar(1)", note: null },
-            { n: "alamat", t: "varchar(200)", note: null },
-            { n: "tlp", t: "varchar(25)", note: null },
-            { n: "status", t: "varchar(1)", note: null },
-            { n: "aktif", t: "tinyint(1)", note: null },
-            { n: "alias", t: "varchar(30)", note: null },
-          ],
-        },
-        c_edu: {
-          color: "#ff8c00",
-          light: "#ffe4d6",
-          note: null,
-          cols: [
-            { n: "KODE", t: "char(2)", pk: true, note: null },
-            { n: "KET", t: "varchar(25)", note: null },
-          ],
-        },
-        c_pkj: {
-          color: "#228b22",
-          light: "#e6f9e6",
-          note: null,
-          cols: [
-            { n: "KODE", t: "varchar(2)", pk: true, note: null },
-            { n: "PEKERJAAN", t: "varchar(25)", note: null },
-          ],
-        },
-        c_ref4: {
-          color: "#1e90ff",
-          light: "#e6f0ff",
-          note: null,
-          cols: [
-            { n: "kode", t: "varchar(6)", pk: true, note: null },
-            { n: "asal", t: "varchar(100)", note: null },
-            { n: "ket", t: "varchar(35)", note: null },
-            { n: "ppk", t: "varchar(8)", note: null },
-            { n: "f_bpjs", t: "char(1)", note: null },
-          ],
-        },
-        c_pst_af: {
-          color: "#ff4500",
-          light: "#ffe6d6",
-          note: null,
-          cols: [
-            { n: "ID", t: "int(11)", pk: true, note: null },
-            { n: "CCM", t: "varchar(8)", fk: "c_pst", note: null },
-            { n: "ASR", t: "varchar(2)", note: null },
-            { n: "DUE", t: "date", note: null },
-            { n: "NO", t: "varchar(20)", note: null },
-            { n: "CRT", t: "timestamp", note: null },
-          ],
-        },
-        cm_sch__: {
-          color: "#2f4f4f",
-          light: "#e8f5f0",
-          note: null,
-          cols: [
-            { n: "ID", t: "int(9)", pk: true, note: null },
-            { n: "DSC", t: "date", note: null },
-            { n: "U2", t: "varchar(2)", fk: "c_upm", note: null },
-            { n: "DR", t: "varchar(3)", fk: "c_doc", note: null },
-            { n: "NO", t: "smallint(3)", note: null },
-            { n: "qu_text", t: "varchar(50)", note: null },
-            { n: "CCM", t: "varchar(8)", fk: "c_pst", note: null },
-            { n: "ASI", t: "varchar(2)", fk: "c_asr", note: null },
-            { n: "KET", t: "varchar(14)", note: null },
-          ],
-        },
-        ref_relegions: {
-          color: "#8b4513",
-          light: "#f5e6d3",
-          note: null,
-          cols: [
-            { n: "id", t: "char(2)", pk: true, note: null },
-            { n: "name", t: "char(20)", note: null },
-          ],
-        },
-        ref_wilayah: {
-          color: "#006666",
-          light: "#e6f9f9",
-          note: null,
-          cols: [
-            { n: "kode", t: "varchar(13)", pk: true, note: null },
-            { n: "nama", t: "varchar(100)", note: null },
-            { n: "kategori", t: "varchar(100)", note: null },
-          ],
-        },
-      };
+      // Define which tables to load for this module
+      const tablesToLoad = [
+        "c_upm",
+        "c_pst",
+        "cm_reg__",
+        "cm_j26__",
+        "c_asr",
+        "c_doc",
+        "c_edu",
+        "c_pkj",
+        "c_ref4",
+        "c_pst_af",
+        "cm_sch__",
+        "ref_relegions",
+        "ref_wilayah",
+      ];
 
+      // Define positions for each table (only needed in halaman terkait)
       const POSITIONS = {
         c_upm: { x: 20, y: 20 },
         c_pst: { x: 280, y: 20 },
@@ -429,41 +226,35 @@
         ref_wilayah: { x: 520, y: 630 },
       };
 
-      const RELATIONS = [
-        // cm_reg__ relationships
-        ["cm_reg__", "unit", "c_upm", "KODE", "n1"],
-        ["cm_reg__", "cm", "c_pst", "cm", "n1"],
-        ["cm_reg__", "dr", "c_doc", "kode", "n1"],
-        ["cm_reg__", "asr", "c_asr", "kode", "n1"],
-        ["cm_reg__", "asal", "c_ref4", "kode", "n1"],
+      // Load and merge table data from individual JSON files
+      let TABLES = {};
+      let RELATIONS = [];
 
-        // c_pst relationships
-        ["c_pst", "reg", "cm_reg__", "no", "11"],
-        ["c_pst", "edu", "c_edu", "KODE", "n1"],
-        ["c_pst", "pkj", "c_pkj", "KODE", "n1"],
-        ["c_pst", "agama", "ref_relegions", "id", "n1"],
-        ["c_pst", "wilayah", "ref_wilayah", "kode", "n1"],
-        ["c_pst", "wilayah_domisili", "ref_wilayah", "kode", "n1"],
-
-        // cm_j26__ relationships
-        ["cm_j26__", "ut", "c_upm", "KODE", "n1"],
-        ["cm_j26__", "dj", "c_doc", "kode", "n1"],
-        ["cm_j26__", "crg", "cm_reg__", "no", "n1"],
-        ["cm_j26__", "ccm", "c_pst", "cm", "n1"],
-        ["cm_j26__", "booking_id", "cm_sch__", "ID", "11"],
-
-        // c_pst_af relationships
-        ["c_pst_af", "CCM", "c_pst", "cm", "n1"],
-
-        // cm_sch__ relationships
-        ["cm_sch__", "U2", "c_upm", "KODE", "n1"],
-        ["cm_sch__", "DR", "c_doc", "kode", "n1"],
-        ["cm_sch__", "CCM", "c_pst", "cm", "n1"],
-        ["cm_sch__", "ASI", "c_asr", "kode", "n1"],
-      ];
-
-      // Initialize when DOM is ready
-      document.addEventListener("DOMContentLoaded", initializeERD);
+      Promise.all(
+        tablesToLoad.map((tableName) =>
+          fetch(`data/tables/${tableName}.json`)
+            .then((response) => response.json())
+            .then((data) => ({
+              tableName,
+              tableData: data.table,
+              relations: data.relations || [],
+            })),
+        ),
+      )
+        .then((results) => {
+          // Merge all tables and relations using spread operator
+          results.forEach(({ tableName, tableData, relations }) => {
+            TABLES = { ...TABLES, ...tableData };
+            RELATIONS = [...RELATIONS, ...relations];
+          });
+          // Initialize ERD after all data is loaded
+          initializeERD();
+        })
+        .catch((error) => {
+          console.error("Error loading ERD data:", error);
+          document.getElementById("canvas").innerHTML =
+            '<div style="display:flex; align-items:center; justify-content:center; height:100%; color:#f00; font-size:14px;">Error loading ERD data</div>';
+        });
     </script>
   </body>
 </html>

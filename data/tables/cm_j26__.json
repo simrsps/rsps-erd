@@ -1,0 +1,114 @@
+{
+  "table": {
+    "cm_j26__": {
+      "color": "#533489",
+      "light": "#eeedfe",
+      "note": null,
+      "cols": [
+        {
+          "n": "id",
+          "t": "int(11)",
+          "pk": true,
+          "note": null
+        },
+        {
+          "n": "db",
+          "t": "date",
+          "note": null
+        },
+        {
+          "n": "ut",
+          "t": "varchar(2)",
+          "fk": "c_upm",
+          "note": null
+        },
+        {
+          "n": "dj",
+          "t": "varchar(3)",
+          "fk": "c_doc",
+          "note": null
+        },
+        {
+          "n": "qu",
+          "t": "smallint(3)",
+          "note": null
+        },
+        {
+          "n": "qd",
+          "t": "smallint(3)",
+          "note": null
+        },
+        {
+          "n": "qu_text",
+          "t": "varchar(50)",
+          "note": null
+        },
+        {
+          "n": "crg",
+          "t": "varchar(9)",
+          "fk": "cm_reg__",
+          "note": null
+        },
+        {
+          "n": "ccm",
+          "t": "varchar(8)",
+          "fk": "c_pst",
+          "note": null
+        },
+        {
+          "n": "booking_id",
+          "t": "int(11)",
+          "fk": "cm_sch__",
+          "note": null
+        },
+        {
+          "n": "hb",
+          "t": "varchar(4)",
+          "note": null
+        },
+        {
+          "n": "status",
+          "t": "varchar(50)",
+          "note": null
+        }
+      ]
+    }
+  },
+  "relations": [
+    [
+      "cm_j26__",
+      "ut",
+      "c_upm",
+      "KODE",
+      "n1"
+    ],
+    [
+      "cm_j26__",
+      "dj",
+      "c_doc",
+      "kode",
+      "n1"
+    ],
+    [
+      "cm_j26__",
+      "crg",
+      "cm_reg__",
+      "no",
+      "n1"
+    ],
+    [
+      "cm_j26__",
+      "ccm",
+      "c_pst",
+      "cm",
+      "n1"
+    ],
+    [
+      "cm_j26__",
+      "booking_id",
+      "cm_sch__",
+      "ID",
+      "11"
+    ]
+  ]
+}

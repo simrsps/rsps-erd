@@ -117,28 +117,47 @@
 
     <script src="shared.js"></script>
     <script>
-      // Define data for Lab ERD
-      const TABLES = {
-        // TODO: Add table definitions for Lab module
-      };
+      // Define which tables to load for this module (empty for now)
+      const tablesToLoad = [];
 
-      const POSITIONS = {
-        // TODO: Add table positions
-      };
+      // Define positions for each table
+      const POSITIONS = {};
 
-      const RELATIONS = [
-        // TODO: Add relationships
-      ];
+      // Load and merge table data from individual JSON files
+      let TABLES = {};
+      let RELATIONS = [];
 
-      // Initialize when DOM is ready
-      document.addEventListener("DOMContentLoaded", () => {
-        if (Object.keys(TABLES).length === 0) {
-          document.getElementById("canvas").innerHTML =
-            '<div style="display:flex; align-items:center; justify-content:center; height:100%; color:#999; font-size:18px;">Modul Lab - Data ERD akan ditampilkan di sini</div>';
-        } else {
-          initializeERD();
-        }
-      });
+      if (tablesToLoad.length === 0) {
+        // Show placeholder if no tables defined
+        document.getElementById("canvas").innerHTML =
+          '<div style="display:flex; align-items:center; justify-content:center; height:100%; color:#999; font-size:18px;">Modul Lab - Data ERD akan ditampilkan di sini</div>';
+      } else {
+        Promise.all(
+          tablesToLoad.map((tableName) =>
+            fetch(`data/tables/${tableName}.json`)
+              .then((response) => response.json())
+              .then((data) => ({
+                tableName,
+                tableData: data.table,
+                relations: data.relations || [],
+              })),
+          ),
+        )
+          .then((results) => {
+            // Merge all tables and relations using spread operator
+            results.forEach(({ tableName, tableData, relations }) => {
+              TABLES = { ...TABLES, ...tableData };
+              RELATIONS = [...RELATIONS, ...relations];
+            });
+            // Initialize ERD after all data is loaded
+            initializeERD();
+          })
+          .catch((error) => {
+            console.error("Error loading ERD data:", error);
+            document.getElementById("canvas").innerHTML =
+              '<div style="display:flex; align-items:center; justify-content:center; height:100%; color:#f00; font-size:14px;">Error loading ERD data</div>';
+          });
+      }
     </script>
   </body>
 </html>
