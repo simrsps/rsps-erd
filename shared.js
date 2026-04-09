@@ -9,6 +9,69 @@ let canvas,
   colEls = {},
   activeTable = null;
 
+// Note helper functions
+function truncateText(text, maxLength = 200) {
+  if (!text) return "";
+  return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+}
+
+function showTooltip(element, note) {
+  if (!note) return;
+
+  const tooltip = document.createElement("div");
+  tooltip.className = "tooltip";
+  tooltip.textContent = truncateText(note);
+
+  document.body.appendChild(tooltip);
+
+  const rect = element.getBoundingClientRect();
+  tooltip.style.left = rect.left + "px";
+  tooltip.style.top = rect.top - tooltip.offsetHeight - 8 + "px";
+}
+
+function hideTooltip() {
+  const tooltip = document.querySelector(".tooltip");
+  if (tooltip) tooltip.remove();
+}
+
+function openNoteModal(title, note) {
+  const overlay = document.createElement("div");
+  overlay.className = "modal-overlay";
+
+  const modal = document.createElement("div");
+  modal.className = "modal-popup";
+
+  modal.innerHTML = `
+    <div class="modal-header">
+      <span>${title}</span>
+      <button class="modal-close-btn" onclick="closeNoteModal()">✕</button>
+    </div>
+    <div class="modal-body">${note}</div>
+  `;
+
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  // Close on overlay click
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeNoteModal();
+  });
+
+  // Close on ESC key
+  const handleEsc = (e) => {
+    if (e.key === "Escape") {
+      closeNoteModal();
+      document.removeEventListener("keydown", handleEsc);
+    }
+  };
+  document.addEventListener("keydown", handleEsc);
+}
+
+function closeNoteModal() {
+  const overlay = document.querySelector(".modal-overlay");
+  if (overlay) overlay.remove();
+}
+
 // Initialize the ERD viewer
 function initializeERD() {
   canvas = document.getElementById("canvas");
@@ -111,8 +174,27 @@ function buildCard(tname) {
   hdr.style.background = tbl.light;
   hdr.style.color = tbl.color;
   hdr.style.borderBottom = "1.5px solid " + tbl.color + "55";
-  hdr.innerHTML = `<span class="tname">${tname}</span>`;
+
+  // Add table name with note icon
+  let headerHTML = `<span class="tname">${tname}</span>`;
+  if (tbl.note) {
+    headerHTML += `<span class="note-icon" title="View note">📝</span>`;
+  }
+  hdr.innerHTML = headerHTML;
   div.appendChild(hdr);
+
+  // Add note icon click handler for table
+  if (tbl.note) {
+    const noteIcon = hdr.querySelector(".note-icon");
+    noteIcon.addEventListener("mouseenter", (e) =>
+      showTooltip(noteIcon, tbl.note),
+    );
+    noteIcon.addEventListener("mouseleave", hideTooltip);
+    noteIcon.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openNoteModal(tname, tbl.note);
+    });
+  }
 
   colEls[tname] = {};
   tbl.cols.forEach((col) => {
@@ -122,7 +204,27 @@ function buildCard(tname) {
     let badges = "";
     if (col.pk) badges += `<span class="badge pk">PK</span>`;
     if (col.fk) badges += `<span class="badge fk">FK</span>`;
-    row.innerHTML = `${badges}<span class="col-name">${col.n}</span><span class="col-type">${col.t}</span>`;
+
+    let noteIcon = "";
+    if (col.note) {
+      noteIcon = `<span class="note-icon" title="View note">📝</span>`;
+    }
+
+    row.innerHTML = `${badges}<span class="col-name">${col.n}</span>${noteIcon}<span class="col-type">${col.t}</span>`;
+
+    // Add note icon click handler for column
+    if (col.note) {
+      const colNoteIcon = row.querySelector(".note-icon");
+      colNoteIcon.addEventListener("mouseenter", (e) =>
+        showTooltip(colNoteIcon, col.note),
+      );
+      colNoteIcon.addEventListener("mouseleave", hideTooltip);
+      colNoteIcon.addEventListener("click", (e) => {
+        e.stopPropagation();
+        openNoteModal(`${tname}.${col.n}`, col.note);
+      });
+    }
+
     div.appendChild(row);
     colEls[tname][col.n] = row;
   });

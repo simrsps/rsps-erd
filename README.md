@@ -119,6 +119,46 @@ const RELATIONS = [
 ✅ **Data Legend** - Legenda untuk PK, FK, dan relationship types  
 ✅ **Responsive** - SVG markers yang scalable untuk semua ukuran  
 ✅ **Reusable** - Style dan logic shared di semua module  
+✅ **Documentation Notes** - Tambahkan catatan dengan 📝 icon di tabel dan kolom  
+
+## Documentation Notes Feature (NEW!)
+
+Sistem ERD sekarang mendukung catatan (notes) untuk mendokumentasikan tabel dan kolom:
+
+### Cara Menggunakan:
+
+1. **Tambahkan Property `note` ke TABLES**:
+```javascript
+const TABLES = {
+  c_upm: {
+    color: "#185fa5",
+    light: "#e6f1fb",
+    note: "Unit/Departemen utama dalam sistem",  // ← Table-level note
+    cols: [
+      { n: "KODE", t: "varchar(2)", pk: true, note: "Kode unik 2 karakter" },
+      { n: "UNIT", t: "varchar(200)", note: "Nama lengkap unit" },
+    ]
+  }
+};
+```
+
+2. **Gunakan di Interface**:
+   - Hover over 📝 icon → lihat tooltip (max 200 karakter)
+   - Click 📝 icon → buka modal dengan konten penuh (HTML-supported)
+   - ESC key / click outside → tutup modal
+
+3. **Konten Note**:
+   - Plain text: Teks biasa
+   - HTML: Full HTML support (gunakan trusted content saja)
+
+### Contoh dengan HTML:
+```javascript
+note: `<strong>Customer ID</strong><br/>
+Primary key untuk identifikasi pelanggan/pasien.
+<ul><li>Format: 8 digit</li><li>Range: 10000000-99999999</li></ul>`
+```
+
+Lihat [NOTE-FEATURE-GUIDE.md](NOTE-FEATURE-GUIDE.md) untuk dokumentasi lengkap.
 
 ## Keyboard Shortcuts
 
